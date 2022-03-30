@@ -1,5 +1,6 @@
 package com.example.authuser.dtos;
 
+import com.example.authuser.validation.UsernameConstraint;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
@@ -24,22 +25,23 @@ public class UserDto {
     private UUID userId;
 
     @NotBlank(groups = UserView.RegistrationPost.class)
-    @Size(min=4, max=50)
+    @Size(min=4, max=50, groups = UserView.RegistrationPost.class)
+    @UsernameConstraint(groups = UserView.RegistrationPost.class)
     @JsonView(UserView.RegistrationPost.class)  //Username não poderá ser atualizado apenas inserido POST
     private String username;
 
-    @NotBlank
-    @Size(min=4, max=50)
+    @NotBlank(groups = UserView.RegistrationPost.class)
     @Email(groups = UserView.RegistrationPost.class)
     @JsonView(UserView.RegistrationPost.class)  // email não poderá ser atualizado Apenas inserido POST
     private String email;
 
     @NotBlank(groups = {UserView.RegistrationPost.class,UserView.PasswordPut.class})
-    @Size(min=6, max=20)
+    @Size(min=6, max=20, groups = {UserView.RegistrationPost.class,UserView.PasswordPut.class})
     @JsonView({UserView.RegistrationPost.class,UserView.PasswordPut.class})  // password poderá ser inserido POST. e também Atualizado PUT
     private String password;
 
     @NotBlank(groups = UserView.PasswordPut.class)
+    @Size(min=6, max=20, groups = UserView.PasswordPut.class)
     @JsonView({UserView.PasswordPut.class})
     private String oldPassword;
 
