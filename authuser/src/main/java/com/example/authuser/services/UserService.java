@@ -1,11 +1,14 @@
 package com.example.authuser.services;
 
 import com.example.authuser.models.UserModel;
+import org.springframework.data.domain.Page;
 
+
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Supplier;
+
 
 public interface UserService {
     List<UserModel> findAll();
@@ -18,4 +21,6 @@ public interface UserService {
     boolean existsByUsername(String username);
 
     boolean existsByEmail(String email);
+
+    Page<UserModel> findAll (Pageable pageable);
 }
