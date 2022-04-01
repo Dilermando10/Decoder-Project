@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)    //TODOS OS ATRIBUTOS QUE NÃO FOREM PRENCHCIDOS ,OU SEJA NULOS, ELE NÃO VAI MOSTRAR
 @Entity
 @Table(name = "TB_USERS")
-public class UserModel  implements Serializable {
+public class UserModel extends RepresentationModel<UserModel> implements Serializable {
     private static final long serialVersionUID = 1l;
 
     @Id
