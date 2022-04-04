@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
-@Data
+    @Data
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Entity
     @Table(name = "TB_MODULES")
@@ -33,11 +33,11 @@ import java.util.UUID;
         private LocalDateTime creationDate;
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @ManyToOne(optional = false)
         private CourseModel course;
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-        @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
-        @Fetch(FetchMode.SUBSELECT)
+        @OneToMany(mappedBy = "module")
         private Set<LessonModel> lessons;
+
 }
