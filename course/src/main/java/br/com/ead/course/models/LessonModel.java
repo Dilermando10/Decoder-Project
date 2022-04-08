@@ -34,7 +34,6 @@ import java.util.UUID;
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         @ManyToOne(optional = false, fetch = FetchType.LAZY)
-        @Fetch(FetchMode.SUBSELECT)
         private ModuleModel module;
 
     }
