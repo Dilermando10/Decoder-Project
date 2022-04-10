@@ -5,12 +5,17 @@ import br.com.ead.course.models.LessonModel;
 import br.com.ead.course.models.ModuleModel;
 import br.com.ead.course.repositories.CourseRepository;
 import br.com.ead.course.repositories.LessonRepository;
+
 import br.com.ead.course.repositories.ModuleRepository;
 import br.com.ead.course.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,10 +36,10 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void delete(CourseModel courseModel) {
         List<ModuleModel> moduleModelList = moduleRepository.findAllLModulesIntoCourse(courseModel.getCourseId());
-        if (!moduleModelList.isEmpty()){
-            for(ModuleModel module : moduleModelList){
+        if (!moduleModelList.isEmpty()) {
+            for (ModuleModel module : moduleModelList) {
                 List<LessonModel> lessonModelList = lessonRepository.findAllLessonsIntoModule(module.getModuleId());
-                if (!lessonModelList.isEmpty()){
+                if (!lessonModelList.isEmpty()) {
                     lessonRepository.deleteAll(lessonModelList);
                 }
             }
@@ -54,7 +59,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseModel> findAll() {
-        return courseRepository.findAll();
+    public Page<CourseModel> findAll(Specification<CourseModel> spec, Pageable pageable) {
+        return courseRepository.findAll(spec,pageable);
     }
+
 }
