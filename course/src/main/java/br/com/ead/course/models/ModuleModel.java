@@ -33,11 +33,14 @@ import java.util.UUID;
         private LocalDateTime creationDate;
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-        @ManyToOne(optional = false, fetch = FetchType.LAZY)
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
         private CourseModel course;
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-        @OneToMany(mappedBy = "module",fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
+        @Fetch(FetchMode.SUBSELECT)
         private Set<LessonModel> lessons;
+    }
 
-}
+
+
