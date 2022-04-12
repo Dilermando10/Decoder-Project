@@ -8,6 +8,7 @@ import br.com.ead.course.repositories.LessonRepository;
 
 import br.com.ead.course.repositories.ModuleRepository;
 import br.com.ead.course.services.CourseService;
+import br.com.ead.course.specifications.SpecificationTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -60,7 +61,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Page<CourseModel> findAll(Specification<CourseModel> spec, Pageable pageable) {
-        return courseRepository.findAll(spec,pageable);
-    }
+        return courseRepository.findAll(spec, pageable);
 
+    }
 }

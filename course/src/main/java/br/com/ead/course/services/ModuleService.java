@@ -1,7 +1,11 @@
 package br.com.ead.course.services;
 
 import br.com.ead.course.models.ModuleModel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
+import javax.print.attribute.standard.PagesPerMinuteColor;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,4 +20,6 @@ public interface ModuleService {
     List<ModuleModel> findAllByCourse(UUID courseId);
 
     Optional<ModuleModel> findById(UUID moduleId);
+
+    Page<ModuleModel> findAllByCourse(Specification<ModuleModel> spec, Pageable pageable);
 }
