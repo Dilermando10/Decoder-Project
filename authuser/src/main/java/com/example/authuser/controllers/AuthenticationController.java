@@ -6,6 +6,9 @@ import com.example.authuser.enums.UserType;
 import com.example.authuser.models.UserModel;
 import com.example.authuser.services.UserService;
 import com.fasterxml.jackson.annotation.JsonView;
+import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,8 @@ import java.time.ZoneId;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/auth")
 public class AuthenticationController {
+
+    Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     @Autowired
     UserService userService;
@@ -43,6 +48,16 @@ public class AuthenticationController {
         userService.save(userModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(userModel);  // Cadastramos um novo Usuário e retornamos
                                                                            // Todos os dados de Usuário Exceto Password Pois está com a a anotação @jsonIgnore
+    }
+
+    @GetMapping("/")
+    public String index(){
+        logger.trace("TRACE");
+        logger.debug("DEBUG");
+        logger.info("INFO");
+        logger.warn("WARN");
+        logger.error("ERROR");
+        return "Logging Spring Boot...";
     }
 
 
